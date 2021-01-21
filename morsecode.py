@@ -249,13 +249,13 @@ def decoding_sentence(morse_sentence):
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
     
-    m_code_l = morse_sentence.split()
-    # m_code_l = [x.strip() for x in m_code_l]
+    m_codeword_l = morse_sentence.split('  ')
+    m_code_2l = [x.split() for x in m_codeword_l]
 
-    decoded_l = [decoding_character(x) for x in m_code_l]
-    decoded_l = [' ' + x + ' ' for x in m_code_l]
+    decoded_l = [[decoding_character(x) for x in mc_l] for mc_l in m_code_2l]
+    decoded_l = [''.join(words_l) for words_l in decoded_l]
 
-    result = ''.join(decoded_l).strip()
+    result = ' '.join(decoded_l)
 
     return result
     # ==================================
@@ -282,13 +282,14 @@ def encoding_sentence(english_sentence):
     # ===Modify codes below=============
     # 조건에 따라 변환되어야 할 결과를 result 변수에 할당 또는 필요에 따라 자유로운 수정
 
-    cleaned_l = get_cleaned_english_sentence(english_sentence)
-    words_l = cleaned_l.split()
+    cleaned = get_cleaned_english_sentence(english_sentence)
+    words_l = cleaned.split()
+    words_2l = [x.split() for x in words_l]
 
-    encoded_l = [encoding_character(x) for x in words_l]
-    encoded_l = [' ' + x + ' ' for x in encoded_l]
+    encoded_l = [[encoding_character(x) for x in w_l] for w_l in words_2l]
+    encoded_l = [' '.join(x) for x in encoded_l]
 
-    result = ''.join(encoded_l).strip()
+    result = '  '.join(encoded_l).strip()
 
     return result
     # ==================================
