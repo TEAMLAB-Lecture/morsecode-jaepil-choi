@@ -284,7 +284,7 @@ def encoding_sentence(english_sentence):
 
     cleaned = get_cleaned_english_sentence(english_sentence)
     words_l = cleaned.split()
-    words_2l = [x.split() for x in words_l]
+    words_2l = [list(x) for x in words_l]
 
     encoded_l = [[encoding_character(x) for x in w_l] for w_l in words_2l]
     encoded_l = [' '.join(x) for x in encoded_l]
